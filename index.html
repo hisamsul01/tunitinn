@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cek Turnitin & Paraphrase AI Gratis - ParaCheck">
+    <title>ParaCheck - Cek Turnitin & Paraphrase AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-check-double text-4xl text-blue-600"></i>
+                <h1 class="text-3xl font-bold text-gray-900">ParaCheck</h1>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-gray-700">
+                <a href="#checker" class="hover:text-blue-600 font-medium">Cek Turnitin</a>
+                <a href="#paraphrase" class="hover:text-blue-600 font-medium">Paraphrase</a>
+                <a href="#how" class="hover:text-blue-600 font-medium">Cara Kerja</a>
+            </div>
+            <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })" 
+                    class="bg-blue-600 text-white px-6 py-3 rounded-2xl hover:bg-blue-700 transition font-medium">
+                Hubungi
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-blue-700 to-indigo-600 text-white py-28">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                Cek Turnitin &<br>Paraphrase Sekaligus
+            </h2>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto opacity-90">
+                Tools gratis untuk mahasiswa Indonesia. Dapatkan skor similarity + versi paraphrase AI dalam detik.
+            </p>
+            <a href="#checker" class="inline-flex items-center gap-3 bg-white text-blue-700 px-10 py-5 rounded-3xl text-lg font-semibold hover:scale-105 transition">
+                <i class="fa-solid fa-rocket"></i> Mulai Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Checker Section -->
+    <section id="checker" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-3">Cek Turnitin</h2>
+                <p class="text-gray-600 text-lg">Masukkan teks Anda dan dapatkan analisis instan</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Input -->
+                <div class="bg-gray-50 p-8 rounded-3xl">
+                    <textarea id="inputText" rows="14" 
+                        class="w-full p-6 rounded-2xl border focus:border-blue-500 outline-none text-lg"
+                        placeholder="Paste teks skripsi, makalah, atau artikel Anda di sini..."></textarea>
+                    
+                    <div class="flex gap-4 mt-6">
+                        <button onclick="checkTurnitin()" 
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-semibold text-lg transition">
+                            <i class="fa-solid fa-magnifying-glass"></i> CEK TURNITIN
+                        </button>
+                        <button onclick="clearAll()" 
+                            class="flex-1 border-2 border-gray-400 hover:bg-gray-100 py-5 rounded-2xl font-semibold text-lg transition">
+                            Hapus
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div id="resultPanel" class="hidden bg-white border-2 border-gray-100 rounded-3xl p-8 shadow-xl">
+                    <!-- Hasil akan muncul di sini melalui JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paraphrase Section -->
+    <section id="paraphrase" class="py-20 bg-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-3">AI Paraphrase</h2>
+                <p class="text-gray-600 text-lg">Ubah teks jadi lebih unik tanpa mengubah arti</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="font-semibold mb-3 text-lg">Teks Asli</h3>
+                    <textarea id="paraOriginal" rows="12" class="w-full p-6 rounded-3xl border focus:border-purple-500 outline-none"></textarea>
+                    <button onclick="paraphraseText()" 
+                        class="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-5 rounded-3xl font-semibold text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Paraphrase Sekarang
+                    </button>
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-3">
+                        <h3 class="font-semibold text-lg">Hasil Paraphrase</h3>
+                        <button onclick="copyParaphrase()" class="text-purple-600 hover:text-purple-700">
+                            <i class="fa-solid fa-copy"></i> Salin
+                        </button>
+                    </div>
+                    <textarea id="paraResult" rows="12" readonly 
+                        class="w-full p-6 rounded-3xl border bg-white"></textarea>
+                    <p class="text-sm text-green-600 mt-3 text-right">Keunikan: <span id="uniqueness" class="font-bold">—</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Butuh fitur lebih lengkap?</h2>
+            <p class="mb-8 text-gray-400">Versi Premium: Upload file • Riwayat • Export PDF</p>
+            <button onclick="alert('Hubungi WA: 08xx-xxxx-xxxx (akan ditambahkan nanti)')" 
+                class="bg-white text-gray-900 px-8 py-4 rounded-3xl font-bold hover:bg-gray-100">
+                Upgrade Premium
+            </button>
+            <p class="text-xs text-gray-500 mt-16">© 2026 ParaCheck • Dibuat untuk Mahasiswa Indonesia</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
